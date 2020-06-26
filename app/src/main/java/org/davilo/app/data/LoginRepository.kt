@@ -1,20 +1,23 @@
 package org.davilo.app.data
 
 import org.davilo.app.data.model.LoggedInUser
+import javax.inject.Inject
 
 /**
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository(val dataSource: LoginDataSource) {
-
+class LoginRepository @Inject constructor(val dataSource: LoginDataSource) {
+    init {
+        println("LoginRepository Constructed")
+    }
     // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null
-        private set
+    private set
 
     val isLoggedIn: Boolean
-        get() = user != null
+    get() = user != null
 
     init {
         // If user credentials will be cached in local storage, it is recommended it be encrypted

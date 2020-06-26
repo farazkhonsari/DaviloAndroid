@@ -4,12 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
+import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.EntryPoint
+
+import dagger.hilt.android.HiltAndroidApp
 import org.davilo.app.data.LoginRepository
 import org.davilo.app.data.Result
 
 import org.davilo.app.R
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel @ViewModelInject constructor(private val loginRepository: LoginRepository) :
+    ViewModel() {
+    init {
+        println("LoginViewModel constructed")
+    }
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm

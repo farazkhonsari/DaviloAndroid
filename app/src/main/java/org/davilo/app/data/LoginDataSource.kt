@@ -2,11 +2,15 @@ package org.davilo.app.data
 
 import org.davilo.app.data.model.LoggedInUser
 import java.io.IOException
+import javax.inject.Inject
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
-class LoginDataSource {
+class LoginDataSource @Inject constructor() {
+    init {
+        println("LoginDataSource Constructed")
+    }
 
     fun login(username: String, password: String): Result<LoggedInUser> {
         try {
