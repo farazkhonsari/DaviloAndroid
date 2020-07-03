@@ -27,7 +27,8 @@ class LoginViewModel @ViewModelInject constructor(private val loginRepository: L
 
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
+        val result = loginRepository.
+        login(username, password)
 
         if (result is Result.Success) {
             _loginResult.value =
