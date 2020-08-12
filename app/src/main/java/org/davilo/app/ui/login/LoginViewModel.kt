@@ -6,36 +6,38 @@ import androidx.lifecycle.ViewModel
 import android.util.Patterns
 import androidx.hilt.lifecycle.ViewModelInject
 import dagger.hilt.EntryPoint
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
-import dagger.hilt.android.HiltAndroidApp
-import org.davilo.app.data.LoginRepository
-import org.davilo.app.data.Result
 
 import org.davilo.app.R
+import org.davilo.app.model.LoginOutput
+import org.davilo.app.model.Output
 
 class LoginViewModel @ViewModelInject constructor(private val loginRepository: LoginRepository) :
     ViewModel() {
-    init {
-        println("LoginViewModel constructed")
-    }
+
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
-    private val _loginResult = MutableLiveData<LoginResult>()
-    val loginResult: LiveData<LoginResult> = _loginResult
 
     fun login(username: String, password: String) {
-        // can be launched in a separate asynchronous job
-        val result = loginRepository.
-        login(username, password)
+        loginRepository.login(email = username, password = password).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { response -> onResponse(response) },
+                { t -> onFailure(t) })
 
-        if (result is Result.Success) {
-            _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
-        } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
-        }
+    }
+
+    private fun onFailure(action: Throwable?) {
+        println("error")
+
+    }
+
+    private fun onResponse(response: Output<LoginOutput>?) {
+        println("response")
     }
 
     fun loginDataChanged(username: String, password: String) {
@@ -48,7 +50,7 @@ class LoginViewModel @ViewModelInject constructor(private val loginRepository: L
         }
     }
 
-    // A placeholder username validation check
+
     private fun isUserNameValid(username: String): Boolean {
         return if (username.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
