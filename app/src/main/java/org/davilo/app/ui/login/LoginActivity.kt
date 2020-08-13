@@ -1,11 +1,6 @@
 package org.davilo.app.ui.login
 
-import android.app.Activity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -15,8 +10,10 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
-
 import org.davilo.app.R
 
 @AndroidEntryPoint
@@ -34,9 +31,10 @@ class LoginActivity : AppCompatActivity() {
         val loading = findViewById<ProgressBar>(R.id.loading)
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
-
-             login.isEnabled = loginState.isDataValid
-
+            loading.visibility = if (loginState.isLoading) View.VISIBLE else View.INVISIBLE
+            login.isEnabled = loginState.isDataValid
+            username.isEnabled = !loginState.isLoading
+            password.isEnabled = !loginState.isLoading
             if (loginState.usernameError != null) {
                 username.error = getString(loginState.usernameError)
             }
@@ -87,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             login.setOnClickListener {
-                loading.visibility = View.VISIBLE
+
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
         }
