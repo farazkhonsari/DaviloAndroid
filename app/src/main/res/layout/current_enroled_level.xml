@@ -16,7 +16,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="#f7f7f7"
+        app:cardBackgroundColor="#fafafa"
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp">
 
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
-                android:gravity="center"
+
                 android:hint="Simple converstation nn  n n "
                 android:text="@{camera}"
                 android:textColor="#757575"
@@ -71,7 +71,7 @@
                 android:id="@+id/imageViewIcon"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_germany_circle"
@@ -82,10 +82,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/ic_germany_circle"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewLevelDescription">
 
+                <include layout="@layout/enroled_module_progress"></include>
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

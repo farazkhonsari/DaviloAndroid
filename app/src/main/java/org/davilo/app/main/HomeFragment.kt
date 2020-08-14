@@ -11,10 +11,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.davilo.app.R
+import org.davilo.app.databinding.CurrentEnroledLevelBinding
 
 import org.davilo.app.databinding.FragmentHomeBinding
 import org.davilo.app.databinding.FragmentHomeBindingImpl
-import org.davilo.app.databinding.RowPhotoHomeBinding
+
 
 class HomeFragment : Fragment() {
 
@@ -48,7 +49,7 @@ class HomeFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             return PhotosViewHolder(
-                RowPhotoHomeBinding.inflate(
+                CurrentEnroledLevelBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -56,7 +57,7 @@ class HomeFragment : Fragment() {
             )
         }
 
-        override fun getItemCount() = 10000
+        override fun getItemCount() = 1
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             if (holder is PhotosViewHolder) {
@@ -64,7 +65,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        class PhotosViewHolder(rowBinding: RowPhotoHomeBinding) :
+        class PhotosViewHolder(rowBinding: CurrentEnroledLevelBinding) :
             RecyclerView.ViewHolder(rowBinding.root) {
             private val binding = rowBinding
             fun bind(str: String) {
