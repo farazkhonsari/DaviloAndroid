@@ -8,7 +8,9 @@ apply plugin: 'dagger.hilt.android.plugin'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
-
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "org.davilo.app"
         minSdkVersion 23

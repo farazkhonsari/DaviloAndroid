@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="camera"
+            type="String" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="#f7f7f7"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewLevelName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="Curiosity"
+                android:textColor="#404D66"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/textViewLevelLevel"
+                app:layout_constraintStart_toEndOf="@id/imageViewIcon"
+                app:layout_constraintTop_toTopOf="@id/imageViewIcon" />
+
+            <TextView
+                android:id="@+id/textViewLevelLevel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:hint="level"
+                android:text="@{camera}"
+                android:textColor="#404D66"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/imageViewIcon"
+                app:layout_constraintStart_toEndOf="@id/imageViewIcon"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLevelName" />
+
+            <TextView
+                android:id="@+id/textViewLevelDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:hint="Simple converstation nn  n n "
+                android:text="@{camera}"
+                android:textColor="#757575"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/imageViewIcon"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewIcon" />
+
+            <ImageView
+                android:id="@+id/imageViewIcon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_germany_circle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ic_germany_circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewLevelDescription">
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
