@@ -19,6 +19,6 @@
         android:id="@+id/details_dest"
         android:name="org.davilo.app.main.PhotoDetailsFragment"
         android:label="Photo Details"
-        tools:layout="@layout/fragment_photo_details" />
+        tools:layout="@layout/category_fragment_list" />
 
 </navigation>

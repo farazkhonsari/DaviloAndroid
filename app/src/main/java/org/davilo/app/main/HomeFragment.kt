@@ -7,19 +7,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import org.davilo.app.R
-import org.davilo.app.databinding.CurrentEnroledLevelBinding
-
 import org.davilo.app.databinding.FragmentHomeBinding
 import org.davilo.app.databinding.FragmentHomeBindingImpl
+import org.davilo.app.model.Enroll
+import org.davilo.app.model.HomeViewModel
+import org.davilo.app.model.ModuleInfo
+import org.davilo.app.model.ObjectType
+import org.davilo.app.ui.Delegate
+import org.davilo.app.ui.EnrolledLevelCell
 
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
+    private lateinit var homeAdapter: Adapter
     lateinit var binding: FragmentHomeBinding
+    private val viewModel: HomeViewModel by viewModels()
+
+    var enroll: Enroll? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,46 +47,76 @@ class HomeFragment : Fragment() {
     }
 
     private fun initBindings() {
-        val photosAdapter = PhotosAdapter()
+        homeAdapter = Adapter()
         val linearLayoutManager = LinearLayoutManager(activity)
         binding.homePhotosList.apply {
-            adapter = photosAdapter
+            this.adapter = homeAdapter
             layoutManager = linearLayoutManager
 
         }
+        observeData()
+        viewModel.loadCurrentEnroll()
+    }
+
+    private fun observeData() {
+        viewModel.currentEnroll.observe(viewLifecycleOwner, Observer {
+            enroll = it
+            homeAdapter.setEnroll(enroll)
+        })
     }
 
 
-    class PhotosAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    inner class Adapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        private var enroll: Enroll? = null
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            return PhotosViewHolder(
-                CurrentEnroledLevelBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
+            var view: EnrolledLevelCell? =
+                this@HomeFragment.context?.let { EnrolledLevelCell(context = it) }
+            view?.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
             )
-        }
+            view?.delegate = object : Delegate {
+                override fun onModuleDidPressed(moduleInfo: ModuleInfo?) {
+                    println(moduleInfo?.module)
+                    val bundle = bundleOf(
+                        "object_type" to ObjectType.Module,
+                        "object_id" to moduleInfo?.id
+                    )
 
-        override fun getItemCount() = 1
-
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            if (holder is PhotosViewHolder) {
-                holder.bind("salam")
-            }
-        }
-
-        class PhotosViewHolder(rowBinding: CurrentEnroledLevelBinding) :
-            RecyclerView.ViewHolder(rowBinding.root) {
-            private val binding = rowBinding
-            fun bind(str: String) {
-                binding.camera = str
-                val bundle = bundleOf("PHOTO_NAME" to str)
-                binding.root.setOnClickListener { view ->
-                    Navigation.findNavController(view).navigate(R.id.action_home_to_details, bundle)
+                    Navigation.findNavController(view!!)
+                        .navigate(R.id.action_home_to_details, bundle)
                 }
             }
+
+
+            return Holder(view!!)
+
+        }
+
+        override fun getItemCount(): Int {
+
+            return if (enroll != null) {
+                1
+            } else {
+                0
+            }
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            if (holder.itemView is EnrolledLevelCell) {
+                (holder.itemView as EnrolledLevelCell).setEnrollObject(enroll)
+            }
+        }
+
+        fun setEnroll(enroll: Enroll?) {
+            this.enroll = enroll
+            notifyDataSetChanged()
+        }
+
+        inner class Holder(view: View) :
+            RecyclerView.ViewHolder(view) {
+
         }
     }
 }

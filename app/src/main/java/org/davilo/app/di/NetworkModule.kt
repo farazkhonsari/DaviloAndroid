@@ -25,6 +25,7 @@ class NetworkModule {
         val client = OkHttpClient.Builder()
             .addInterceptor(logging)
             .build()
+
         return Retrofit.Builder()
             .baseUrl("https://davilo.org/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())

@@ -5,7 +5,6 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.davilo.app.model.LoginInput
 import org.davilo.app.model.LoginOutput
-import org.davilo.app.model.Output
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(private val apiInterface: ApiInterface) {

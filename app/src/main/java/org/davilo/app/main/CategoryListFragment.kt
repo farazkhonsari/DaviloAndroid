@@ -9,17 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import org.davilo.app.R
-import org.davilo.app.databinding.FragmentListBinding
+import org.davilo.app.databinding.CategoryFragmentListBinding
+
 import org.davilo.app.model.Enroll
 import org.davilo.app.model.ModuleInfo
 import org.davilo.app.model.ObjectType
 import org.davilo.app.ui.Delegate
 import org.davilo.app.ui.EnrolledLevelCell
 
-class ListFragment : Fragment() {
+class CategoryListFragment : Fragment() {
 
     private lateinit var objectId: String
-    private lateinit var binding: FragmentListBinding
+    private lateinit var binding: CategoryFragmentListBinding
     private lateinit var objectType: ObjectType
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,9 +32,10 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentListBinding.inflate(inflater)
+        binding = CategoryFragmentListBinding.inflate(inflater)
         return binding.root
     }
+
     private fun loadArguments() {
         arguments?.getString("object_type")?.let {
             objectType = ObjectType.valueOf(it)
@@ -48,7 +50,7 @@ class ListFragment : Fragment() {
         private var enroll: Enroll? = null
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             var view: EnrolledLevelCell? =
-                this@ListFragment.context?.let { EnrolledLevelCell(context = it) }
+                this@CategoryListFragment.context?.let { EnrolledLevelCell(context = it) }
             view?.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT

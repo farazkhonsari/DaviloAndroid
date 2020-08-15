@@ -1,19 +1,25 @@
-package org.davilo.app.ui.login
+package org.davilo.app
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import org.davilo.app.model.LoginInput
-import org.davilo.app.model.LoginOutput
-import org.davilo.app.model.Output
+import org.davilo.app.model.AppPreferences
+import org.davilo.app.model.GetCurrentEnrollInput
+import org.davilo.app.model.GetCurrentEnrollOutput
+import org.davilo.app.ui.login.ApiInterface
 import javax.inject.Inject
 
-class LoginRepository @Inject constructor(private val apiInterface: ApiInterface) {
-    fun login(email: String, password: String): Observable<LoginOutput> {
-        return apiInterface.login(LoginInput(email = email, password = password))
-            .subscribeOn(Schedulers.io())
+class Repository @Inject constructor(
+    private val apiInterface: ApiInterface,
+    private val appPreferences: AppPreferences
+) {
+    fun getCurrentEnroll(): Observable<GetCurrentEnrollOutput> {
+        return apiInterface.getCurrentEnroll(
+            Authorization = "Bearer" + " " + appPreferences.getToken(), input =
+            GetCurrentEnrollInput(user_id = appPreferences.getUserId())
+        ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread()).flatMap { response ->
-                Observable.just(response.outputData[0])
+                Observable.just(response.outputData)
             }
     }
 }

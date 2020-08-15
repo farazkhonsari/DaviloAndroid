@@ -9,7 +9,16 @@ public class AppPreferences @Inject constructor(@ApplicationContext context: Con
     var sharedPreferences: SharedPreferences = context.getSharedPreferences("app", 0)
 
     enum class Key {
-        Token
+        Token,
+        UserId,
+    }
+
+    fun getToken(): String? {
+        return getString(Key.Token)
+    }
+
+    fun getUserId(): String? {
+        return getString(Key.UserId)
     }
 
     public fun setString(key: Key, value: String?) {

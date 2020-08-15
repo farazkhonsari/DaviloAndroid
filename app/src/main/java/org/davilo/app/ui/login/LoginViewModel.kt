@@ -1,22 +1,15 @@
 package org.davilo.app.ui.login
 
+
+import android.util.Patterns
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.util.Patterns
-import androidx.hilt.lifecycle.ViewModelInject
-import dagger.hilt.EntryPoint
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
-
-
 import org.davilo.app.R
 import org.davilo.app.model.AppPreferences
 import org.davilo.app.model.LoginOutput
-import org.davilo.app.model.Output
-import javax.inject.Inject
 
 class LoginViewModel @ViewModelInject constructor(
     val loginRepository: LoginRepository,
@@ -57,7 +50,7 @@ class LoginViewModel @ViewModelInject constructor(
 
     private fun onResponse(response: LoginOutput) {
         appPreferences.setString(AppPreferences.Key.Token, response.token)
-
+        appPreferences.setString(AppPreferences.Key.UserId, response.user.id)
     }
 
     fun loginDataChanged(username: String, password: String) {

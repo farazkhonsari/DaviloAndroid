@@ -1,2 +1,5 @@
-package org.davilo.app.model 
+package org.davilo.app.model
 
+data class User(
+    val id: String?
+)

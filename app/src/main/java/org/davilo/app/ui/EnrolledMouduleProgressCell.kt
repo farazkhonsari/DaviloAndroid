@@ -4,15 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import org.davilo.app.databinding.CurrentEnroledLevelBinding
-import org.davilo.app.model.Enroll
+import org.davilo.app.databinding.EnroledModuleProgressBinding
+import org.davilo.app.model.ModuleInfo
 
-class EnrolledLevelCell(
+class EnrolledMouduleProgressCell(
     context: Context
 ) : FrameLayout(context) {
-    var enroll: Enroll? = null
-
-    val binding: CurrentEnroledLevelBinding = CurrentEnroledLevelBinding.inflate(
+    var moduleInfo: ModuleInfo? = null
+    val binding = EnroledModuleProgressBinding.inflate(
         LayoutInflater.from(context),
         null,
         false
@@ -27,9 +26,9 @@ class EnrolledLevelCell(
 
     }
 
-    fun setEnrollObject(enroll: Enroll?) {
-        binding.enroll = enroll
-        this.enroll = enroll
+    fun bindModule(moduleInfo: ModuleInfo?) {
+        this.moduleInfo = moduleInfo
+        binding.moduleInfo = moduleInfo
 
 
     }

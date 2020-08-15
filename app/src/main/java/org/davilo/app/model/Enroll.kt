@@ -1,3 +1,25 @@
 package org.davilo.app.model
 
-data class LoginInput(val email: String, val password: String)
+data class Enroll(
+    val id: String,
+    val level: String,
+    val modules_info: ArrayList<ModuleInfo>
+
+)
+
+
+data class ModuleInfo(
+    val id: String,
+    val module: String,
+    val NumberOfModuleApps: Int,
+    val NumberOfCompleteModuleApps: Int
+
+) {
+    fun getPercentString(): String {
+        return getPercent().toString()+"%"
+    }
+
+    fun getPercent(): Int {
+        return (NumberOfCompleteModuleApps * 100f / NumberOfModuleApps).toInt()
+    }
+}
