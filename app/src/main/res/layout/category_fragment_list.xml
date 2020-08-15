@@ -3,20 +3,18 @@
 
     <data>
 
-        <variable
-            name="camera"
-            type="String" />
+
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".PhotoDetailsFragment">
+        tools:context=".main.ListFragment">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@{camera}" />s
+            tools:listitem="@layout/current_enroled_level" />
     </FrameLayout>
 </layout>
