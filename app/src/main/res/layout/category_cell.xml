@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="enroll"
-            type="org.davilo.app.model.Enroll" />
+            name="category"
+            type="org.davilo.app.model.Category" />
     </data>
 
     <FrameLayout
@@ -36,8 +36,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:gravity="start"
-                    android:hint="levelName"
-                    android:text="category"
+                    android:hint="name"
+                    android:text="@{category.category}"
                     android:textColor="#404D66"
                     android:textSize="18sp"
 
@@ -53,11 +53,10 @@
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="16dp"
                     android:gravity="end"
-                    android:hint="levelName"
-                    android:text="16/3"
+                    android:hint="16/5"
+                    android:text="@{category.completedNumberString}"
                     android:textColor="#404D66"
                     android:textSize="15sp"
-
 
 
                     app:layout_constraintBottom_toBottomOf="parent"

@@ -50,7 +50,7 @@
                     android:layout_marginStart="8dp"
                     android:gravity="start"
                     android:hint="level"
-                    android:text="@{enroll.level}"
+                    android:text="Beginner"
                     android:textColor="#404D66"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -65,7 +65,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"
                     android:gravity="start"
-                    android:text="Must Fill "
+                    android:text="Learn How To Say Simple Things"
 
                     android:textColor="#757575"
                     android:textSize="12sp"

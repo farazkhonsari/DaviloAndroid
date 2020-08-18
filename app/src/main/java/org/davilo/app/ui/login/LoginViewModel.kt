@@ -60,7 +60,9 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     fun invalidateLoginFormState() {
-        if (loginObserver != null) {
+        if (appPreferences.getToken() != null) {
+            _loginForm.value = LoginFormState(isSignedIn = true)
+        } else if (loginObserver != null) {
             _loginForm.value = LoginFormState(isLoading = true)
         } else if (!isUserNameValid(username)) {
             _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)

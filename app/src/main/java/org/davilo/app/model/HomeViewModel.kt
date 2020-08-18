@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.rxjava3.disposables.Disposable
 import org.davilo.app.Repository
 
 /**
@@ -11,17 +12,26 @@ import org.davilo.app.Repository
  */
 class HomeViewModel @ViewModelInject constructor(private val repository: Repository) :
     ViewModel() {
+    var request: Disposable? = null
     val currentEnroll = MutableLiveData<Enroll>()
+    val isLoading = MutableLiveData<Boolean>()
 
     fun loadCurrentEnroll() {
-        repository.getCurrentEnroll()
+
+        if (request != null || currentEnroll.value != null) {
+            return
+        }
+        isLoading.value = true
+        request = repository.getCurrentEnroll()
             .subscribe(
                 { (current_enroll) ->
                     currentEnroll.setValue(
                         current_enroll
                     )
+                    isLoading.value = false
                 }
             ) { error: Throwable ->
+                isLoading.value = false
                 Log.e(
                     TAG,
                     "getPokemons: " + error.message

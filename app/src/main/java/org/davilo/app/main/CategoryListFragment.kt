@@ -6,22 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import org.davilo.app.R
 import org.davilo.app.databinding.CategoryFragmentListBinding
+import org.davilo.app.model.Category
+import org.davilo.app.model.CategoryListViewModel
+import org.davilo.app.ui.CategoryCell
 
-import org.davilo.app.model.Enroll
-import org.davilo.app.model.ModuleInfo
-import org.davilo.app.model.ObjectType
-import org.davilo.app.ui.Delegate
-import org.davilo.app.ui.EnrolledLevelCell
-
+@AndroidEntryPoint
 class CategoryListFragment : Fragment() {
 
+    private lateinit var homeAdapter: Adapter
     private lateinit var objectId: String
     private lateinit var binding: CategoryFragmentListBinding
-    private lateinit var objectType: ObjectType
+    private val viewModel: CategoryListViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,35 +40,63 @@ class CategoryListFragment : Fragment() {
         return binding.root
     }
 
-    private fun loadArguments() {
-        arguments?.getString("object_type")?.let {
-            objectType = ObjectType.valueOf(it)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initBindings()
+    }
+
+    private fun initBindings() {
+        homeAdapter = Adapter()
+        val linearLayoutManager = LinearLayoutManager(activity)
+        binding.recyclerView.apply {
+            this.adapter = homeAdapter
+            layoutManager = linearLayoutManager
+
         }
+
+        observeData()
+        viewModel.loadCurrentEnroll(objectId)
+    }
+
+    private fun observeData() {
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.loading.show()
+            } else {
+                binding.loading.hide()
+            }
+        })
+        viewModel.categories.observe(viewLifecycleOwner, Observer {
+            homeAdapter.setCategories(it)
+        })
+
+    }
+
+    private fun loadArguments() {
         arguments?.getString("object_id")?.let {
             objectId = it
         }
+
+
     }
 
 
     inner class Adapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        private var enroll: Enroll? = null
+        var array: ArrayList<Category> = ArrayList()
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            var view: EnrolledLevelCell? =
-                this@CategoryListFragment.context?.let { EnrolledLevelCell(context = it) }
+            var view: CategoryCell? =
+                this@CategoryListFragment.context?.let { CategoryCell(context = it) }
             view?.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
-            view?.delegate = object : Delegate {
-                override fun onModuleDidPressed(moduleInfo: ModuleInfo?) {
-                    println(moduleInfo?.module)
-                    val bundle = bundleOf(
-                        "object_type" to ObjectType.Category,
-                        "object_id" to moduleInfo?.id
-                    )
-                    Navigation.findNavController(view!!)
-                        .navigate(R.id.action_home_to_details, bundle)
-                }
+            view?.setOnClickListener { view ->
+                var cell = view as CategoryCell
+                val bundle = bundleOf(
+                    "object_id" to (cell.category?.id ?: "")
+                )
+                Navigation.findNavController(view)
+                    .navigate(R.id.go_to_apps, bundle)
             }
 
 
@@ -74,21 +106,20 @@ class CategoryListFragment : Fragment() {
 
         override fun getItemCount(): Int {
 
-            return if (enroll != null) {
-                1
-            } else {
-                0
-            }
+
+            return array.size
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            if (holder.itemView is EnrolledLevelCell) {
-                (holder.itemView as EnrolledLevelCell).setEnrollObject(enroll)
+            if (holder.itemView is CategoryCell) {
+                (holder.itemView as CategoryCell).bindCategory(array[position])
             }
         }
 
-        fun setEnroll(enroll: Enroll?) {
-            this.enroll = enroll
+        fun setCategories(categories: ArrayList<Category>?) {
+            if (categories != null) {
+                this.array = categories
+            }
             notifyDataSetChanged()
         }
 

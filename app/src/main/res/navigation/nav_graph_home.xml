@@ -11,14 +11,26 @@
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_home_to_details"
-            app:destination="@id/details_dest" />
+            android:id="@+id/go_to_category"
+            app:destination="@id/categories" />
     </fragment>
 
     <fragment
-        android:id="@+id/details_dest"
-        android:name="org.davilo.app.main.PhotoDetailsFragment"
-        android:label="Photo Details"
-        tools:layout="@layout/category_fragment_list" />
+        android:id="@+id/categories"
+        android:name="org.davilo.app.main.CategoryListFragment"
+        android:label="Category"
+        tools:layout="@layout/category_fragment_list">
+        <action
+            android:id="@+id/go_to_apps"
+            app:destination="@id/apps" />
+    </fragment>
+    <fragment
+        android:id="@+id/apps"
+        android:name="org.davilo.app.main.AppListFragment"
+        android:label="Apps"
+        tools:layout="@layout/category_fragment_list">
+
+    </fragment>
+
 
 </navigation>

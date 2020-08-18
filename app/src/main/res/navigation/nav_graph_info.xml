@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/generalInfo_dest"
-        android:name="org.davilo.app.main.GeneralInfoFragment"
-        android:label="General Info"
-        tools:layout="@layout/fragment_general_info" />
+        android:name="org.davilo.app.main.LevelListFragment"
+        android:label="Levels"
+        tools:layout="@layout/level_fragment_list" />
 
 </navigation>

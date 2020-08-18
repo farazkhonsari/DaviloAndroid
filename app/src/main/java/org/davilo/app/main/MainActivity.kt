@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         controller.observe(this, Observer { navController ->
            setupActionBarWithNavController(navController)
         })
+
         currentNavController = controller
     }
 

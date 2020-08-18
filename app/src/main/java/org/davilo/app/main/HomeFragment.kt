@@ -19,7 +19,6 @@ import org.davilo.app.databinding.FragmentHomeBindingImpl
 import org.davilo.app.model.Enroll
 import org.davilo.app.model.HomeViewModel
 import org.davilo.app.model.ModuleInfo
-import org.davilo.app.model.ObjectType
 import org.davilo.app.ui.Delegate
 import org.davilo.app.ui.EnrolledLevelCell
 
@@ -63,6 +62,13 @@ class HomeFragment : Fragment() {
             enroll = it
             homeAdapter.setEnroll(enroll)
         })
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.loading.show()
+            } else {
+                binding.loading.hide()
+            }
+        })
     }
 
 
@@ -80,12 +86,10 @@ class HomeFragment : Fragment() {
                 override fun onModuleDidPressed(moduleInfo: ModuleInfo?) {
                     println(moduleInfo?.module)
                     val bundle = bundleOf(
-                        "object_type" to ObjectType.Module,
                         "object_id" to moduleInfo?.id
                     )
-
                     Navigation.findNavController(view!!)
-                        .navigate(R.id.action_home_to_details, bundle)
+                        .navigate(R.id.go_to_category, bundle)
                 }
             }
 

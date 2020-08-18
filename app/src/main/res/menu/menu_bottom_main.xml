@@ -3,18 +3,11 @@
 
     <item
         android:id="@+id/nav_graph_home"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/home"
         android:title="@string/title_home" />
     <item
         android:id="@+id/nav_graph_info"
-        android:icon="@drawable/ic_info"
-        android:title="@string/title_info" />
-    <item
-        android:id="@+id/nav_graph_info1"
-        android:icon="@drawable/ic_info"
-        android:title="@string/title_info" />
-    <item
-        android:id="@+id/nav_graph_info2"
-        android:icon="@drawable/ic_info"
-        android:title="@string/title_info" />
+        android:icon="@drawable/menu"
+        android:title="Levels" />
+
 </menu>

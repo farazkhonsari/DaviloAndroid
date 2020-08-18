@@ -17,5 +17,28 @@ interface ApiInterface {
         @Body input: GetCurrentEnrollInput
     ): Observable<Output<GetCurrentEnrollOutput>>
 
+    @POST("./apps/get-enroll-info/")
+    fun getCategories(
+        @Header("Authorization") Authorization: String?,
+        @Body input: GetCategoryListInput
+    ): Observable<Output<GetCategoryListOutput>>
+
+    @POST("./apps/get-enroll-info/")
+    fun getAppsOfCategory(
+        @Header("Authorization") Authorization: String?,
+        @Body input: GetAppsListInput
+    ): Observable<Output<GetAppsListOutput>>
+
+    @POST("./apps/get-enroll-info/")
+    fun getAllLevelList(
+        @Header("Authorization") Authorization: String?,
+        @Body input: GetLevelListInput
+    ): Observable<Output<GetLevelListOutput>>
+    @POST("./apps/set-enroll/")
+    fun setEnroll(
+        @Header("Authorization") Authorization: String?,
+        @Body input: SetEnrollInput
+    ): Observable<Output<SetEnrollOutput>>
+
 
 }
