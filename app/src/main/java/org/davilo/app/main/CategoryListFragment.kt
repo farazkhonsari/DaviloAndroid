@@ -21,6 +21,7 @@ import org.davilo.app.ui.CategoryCell
 @AndroidEntryPoint
 class CategoryListFragment : Fragment() {
 
+    private lateinit var objectName: String
     private lateinit var homeAdapter: Adapter
     private lateinit var objectId: String
     private lateinit var binding: CategoryFragmentListBinding
@@ -53,7 +54,7 @@ class CategoryListFragment : Fragment() {
             layoutManager = linearLayoutManager
 
         }
-
+        (activity as MainActivity).supportActionBar?.title = objectName
         observeData()
         viewModel.loadCurrentEnroll(objectId)
     }
@@ -75,8 +76,12 @@ class CategoryListFragment : Fragment() {
     private fun loadArguments() {
         arguments?.getString("object_id")?.let {
             objectId = it
-        }
 
+        }
+        arguments?.getString("object_name")?.let {
+            objectName = it
+
+        }
 
     }
 
@@ -93,7 +98,8 @@ class CategoryListFragment : Fragment() {
             view?.setOnClickListener { view ->
                 var cell = view as CategoryCell
                 val bundle = bundleOf(
-                    "object_id" to (cell.category?.id ?: "")
+                    "object_id" to (cell.category?.id ?: ""),
+                    "object_name" to (cell.category?.category ?: "")
                 )
                 Navigation.findNavController(view)
                     .navigate(R.id.go_to_apps, bundle)

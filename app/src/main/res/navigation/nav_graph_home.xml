@@ -12,13 +12,17 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/go_to_category"
-            app:destination="@id/categories" />
+            app:destination="@id/categories"
+            app:enterAnim="@anim/alpha_in"
+            app:popExitAnim="@anim/alpha_out" />
     </fragment>
 
     <fragment
         android:id="@+id/categories"
         android:name="org.davilo.app.main.CategoryListFragment"
         android:label="Category"
+        app:enterAnim="@anim/alpha_in"
+        app:popExitAnim="@anim/alpha_out"
         tools:layout="@layout/category_fragment_list">
         <action
             android:id="@+id/go_to_apps"
@@ -28,6 +32,8 @@
         android:id="@+id/apps"
         android:name="org.davilo.app.main.AppListFragment"
         android:label="Apps"
+        app:enterAnim="@anim/alpha_in"
+        app:popExitAnim="@anim/alpha_out"
         tools:layout="@layout/category_fragment_list">
 
     </fragment>

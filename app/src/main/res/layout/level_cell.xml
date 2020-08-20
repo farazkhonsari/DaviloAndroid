@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Number Of Apps"
+                    android:text="@{level.numberOfAppsString}"
                     android:textColor="#626262"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -65,15 +65,16 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewLevelDescription"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Description Of App"
+                    android:gravity="start"
+                    android:text="@{level.description}"
                     android:textColor="#626262"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     android:visibility="visible"
-                    app:layout_constraintLeft_toLeftOf="@id/progressBar"
+                    app:layout_constraintEnd_toEndOf="@id/progressBar"
+                    app:layout_constraintStart_toStartOf="@id/progressBar"
                     app:layout_constraintTop_toBottomOf="@id/textViewCount" />
 
 

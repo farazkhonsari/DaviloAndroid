@@ -20,6 +20,7 @@ import org.davilo.app.ui.AppCell
 @AndroidEntryPoint
 class AppListFragment : Fragment() {
 
+    private lateinit var objectName: String
     private lateinit var homeAdapter: Adapter
     private lateinit var objectId: String
     private lateinit var binding: AppFragmentListBinding
@@ -54,6 +55,7 @@ class AppListFragment : Fragment() {
         }
         observeData()
         viewModel.loadCurrentEnroll(objectId)
+        (activity as MainActivity).supportActionBar?.title = objectName
     }
 
     private fun observeData() {
@@ -73,6 +75,9 @@ class AppListFragment : Fragment() {
     private fun loadArguments() {
         arguments?.getString("object_id")?.let {
             objectId = it
+        }
+        arguments?.getString("object_name")?.let {
+            objectName = it
         }
 
 

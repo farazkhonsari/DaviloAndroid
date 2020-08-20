@@ -39,9 +39,11 @@ class LevelCell(
         if (level != null) {
             if (level.is_enroll) {
                 binding.enrollButton.setText("Continue")
+                binding.textViewCount.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.VISIBLE
             } else {
                 binding.enrollButton.setText("Enroll")
+                binding.textViewCount.visibility = View.GONE
                 binding.progressBar.visibility = View.INVISIBLE
             }
         }

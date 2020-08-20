@@ -86,7 +86,8 @@ class HomeFragment : Fragment() {
                 override fun onModuleDidPressed(moduleInfo: ModuleInfo?) {
                     println(moduleInfo?.module)
                     val bundle = bundleOf(
-                        "object_id" to moduleInfo?.id
+                        "object_id" to moduleInfo?.id,
+                        "object_name" to moduleInfo?.module
                     )
                     Navigation.findNavController(view!!)
                         .navigate(R.id.go_to_category, bundle)
