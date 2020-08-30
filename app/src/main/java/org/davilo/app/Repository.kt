@@ -60,4 +60,14 @@ class Repository @Inject constructor(
                 Observable.just(1)
             }
     }
+
+    fun completeApp(appId: String?): Observable<Int> {
+        return apiInterface.completeApp(
+            Authorization = "Bearer" + " " + appPreferences.getToken(), input =
+            CompleteAppInput(app_id = appId)
+        ).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).flatMap {
+                Observable.just(1)
+            }
+    }
 }

@@ -4,9 +4,9 @@ data class Category(
     val id: String?,
     val category: String?,
     val NumberOfCategoryApps: Int?,
-    val NumberOfCompleteCategoryApps: Int
+    val NumberOfCompletedCategoryApps: Int
 ) {
     fun getCompletedNumberString(): String {
-        return NumberOfCompleteCategoryApps.toString() + "/" + NumberOfCategoryApps.toString()
+        return NumberOfCompletedCategoryApps.toString() + "/" + NumberOfCategoryApps.toString()
     }
 }

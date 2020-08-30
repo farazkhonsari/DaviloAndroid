@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import org.davilo.app.databinding.LevelCellBinding
 import org.davilo.app.model.Level
+import kotlin.math.roundToInt
 
 class LevelCell(
     context: Context
@@ -48,7 +49,10 @@ class LevelCell(
             }
         }
         binding.enrollButton.setOnClickListener { delegate?.onEnrollSelected(level) }
-
+        if (level?.complete_apps != null && level?.total_apps != null) {
+            binding.progressBar.progress =
+                (level.complete_apps * 100f / level.total_apps).roundToInt()
+        }
 
     }
 }

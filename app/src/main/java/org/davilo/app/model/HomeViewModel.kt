@@ -19,9 +19,10 @@ class HomeViewModel @ViewModelInject constructor(private val repository: Reposit
     fun loadCurrentEnroll() {
 
         if (request != null || currentEnroll.value != null) {
-            return
+//            return
+        } else {
+            isLoading.value = true
         }
-        isLoading.value = true
         request = repository.getCurrentEnroll()
             .subscribe(
                 { (current_enroll) ->

@@ -19,9 +19,11 @@ class CategoryListViewModel @ViewModelInject constructor(private val repository:
 
     fun loadCurrentEnroll(objectId: String) {
         if (categories.value != null || request != null) {
-            return
+
+        }else{
+            isLoading.value = true
         }
-        isLoading.value = true
+
         request = repository.getCategoryList(objectId)
             .subscribe(
                 { response ->

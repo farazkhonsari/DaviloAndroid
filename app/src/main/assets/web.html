@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript View</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+
+    @font-face { font-family: Delicious; src: url('file:///android_asset/fonts/IRANSansMobile.ttf'); }
+    .w3-button {width:90%;   font-family:  Delicious;}
+div {
+    border: 4px solid yellow;
+    padding: 16px;
+    width: 100%;
+    text-align: justify;
+    position : fix;
+    align: center;
+}
+ </style>
+
+    <script type="text/javascript">
+
+        function clientAction(s){
+           var s= androidApp.clientAction(s);
+           document.getElementById("message").innerHTML=s;
+        }
+
+        function clientResponse(s){
+            document.getElementById("message").innerHTML=document.getElementById("message").innerHTML+' '+s;
+            return false;
+        }
+        function askUserToken(){
+             document.getElementById("message").innerHTML=document.getElementById("message").innerHTML+' '+'byeee'+androidApp.getUserToken();
+           return false;
+       }
+
+        window.onload = function(){
+            var form = document.getElementById("formBarcode");
+            form.onsubmit = barcodeAction;
+
+            form = document.getElementById("numberPickerAction");
+            form.onsubmit = numberPickerAction;
+
+            form = document.getElementById("formStringPicker");
+            form.onsubmit = stringPickerAction;
+
+            form = document.getElementById("formMyPhone");
+            form.onsubmit = myPhoneAction;
+
+ form = document.getElementById("formAskMyPhone");
+            form.onsubmit = askMyPhoneAction;
+
+            form = document.getElementById("myUserNameAction");
+            form.onsubmit = myUserNameAction;
+
+            form = document.getElementById("textBoxAction");
+            form.onsubmit = textBoxAction;
+
+            form = document.getElementById("smsAction");
+            form.onsubmit = smsAction;
+
+            form = document.getElementById("callAction");
+            form.onsubmit = callAction;
+
+            form = document.getElementById("linkAction");
+            form.onsubmit = linkAction;
+
+            form = document.getElementById("alertAction");
+            form.onsubmit = alertAction;
+
+            form = document.getElementById("persianCalendarAction");
+            form.onsubmit = persianCalendarAction;
+
+            form = document.getElementById("englishCalendarAction");
+            form.onsubmit = englishCalendarAction;
+            form = document.getElementById("locationAction");
+            form.onsubmit = locationAction;
+            form = document.getElementById("myLocationAction");
+            form.onsubmit = myLocationAction;
+
+            form = document.getElementById("askMyLocationAction");
+            form.onsubmit = askMyLocationAction;
+
+            form = document.getElementById("askUserToken");
+            form.onsubmit = askUserToken;
+
+        }
+
+        function barcodeAction(){
+            clientAction('{"id":"22","type":"Barcode","title":"اسکن کد"}')
+            return false;
+        }
+        function numberPickerAction(){
+            clientAction('{"type": "NumberPicker","title":"تعداد مسافر","button_number_picker":{"default_value":4,"max_value":10,"min_value":1}}')
+            return false;
+        }
+        function stringPickerAction(){
+            clientAction('{"title":"نوع بلیط","button_string_picker":{"default_value":"بیزینس","items":["اقتصادی","بیزینس","فرست کلس"]},"type":"StringPicker"}')
+            return false;
+        }
+        function myPhoneAction(){
+            clientAction('{"type":"MyPhoneNumber"}')
+            return false;
+        }
+        function askMyPhoneAction(){
+            clientAction('{"type":"AskMyPhoneNumber"}')
+            return false;
+        }
+
+        function myUserNameAction(){
+            clientAction('{"type":"MyUsername"}')
+            return false;
+        }
+
+        function myUserNameAction(){
+            clientAction('{"type":"MyUsername"}')
+            return false;
+        }
+        function textBoxAction(){
+            clientAction('{"title":"نام خانوادگی","type":"Textbox","button_textbox":{"place_holder":"نام خانوادگی","type_keypad":"String","default_value":"خونساری","type_line":"SingleLine"}}')
+            return false;
+        }
+
+        function smsAction(){
+            clientAction('{"button_sms":{"message":"فعال سازی سرویس فال روز","to_number":"4075"},"title":"پیامک فعال سازی","type":"SMS"}')
+            return false;
+        }
+        function callAction(){
+            clientAction('{"button_call":{"phone_number":"09124053654"},"type":"Call"}')
+            return false;
+        }
+        function linkAction(){
+            clientAction('{"button_link":{"action":"khn_club","type":"action"},"type":"Link"}')
+            return false;
+        }
+        function alertAction(){
+            clientAction('{"button_alert":{"message":"این سرویس در حال حاضر فعال نیست. برای دستری به این قسمت لطفا بعدا مراجعه کنید"},"title":"خطای دسترسی","type":"Alert"}')
+            return false;
+        }
+        function persianCalendarAction(){
+            clientAction('{"button_calendar":{"max_year":1400,"min_year":1390,"type":"DatePersian"},"title":"تاریخ رفت فارسی","type":"Calendar"}')
+            return false;
+        }
+        function englishCalendarAction(){
+            clientAction('{"button_calendar":{"default_value":"1993-05-04","max_year":2012,"min_year":1990,"type":"DateGregorian"},"title":"تاریخ برگشت میلادی","type":"Calendar"}')
+            return false;
+        }
+        function locationAction(){
+            clientAction('{"title":"انتخاب مقصد","type":"LocationPicker","button_location":{"default_map_location":{"latitude":"37.052191","longitude":"-95.643251"},"default_pointer_location":{"latitude":"37.052191","longitude":"-95.643251"}}}')
+            return false;
+        }
+        function myLocationAction(){
+            clientAction('{"type":"MyLocation"}')
+            return false;
+        }
+
+            function askMyLocationAction(){
+            clientAction('{"type":"AskMyLocation"}')
+            return false;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</head>
+<
+
+>
+
+<header class="w3-top w3-bar w3-theme">
+    <div id="message" class="w3-black">saalam</div>
+</header>
+<br>
+<br>
+<br>
+<body>
+
+<a href="https://rubika.ir">Visit W3Schools.com!</a>
+
+<form id="formBarcode">
+    <input class="w3-button w3-pale-red w3-round-large w3-margin-left w3-margin-right w3-margin-top w3-padding-large box-shadow"
+           type="submit" value="اسکن بار کد"/>
+</form>
+
+
+<form id="numberPickerAction">
+    <input class="w3-button w3-pale-yellow w3-round-large  w3-margin-left w3-margin-right w3-margin-top w3-padding-large box-shadow"
+           type="submit" value="تعداد مسافر"/>
+</form>
+
+
+<form id="formStringPicker">
+    <input class="w3-button w3-pale-green w3-round-large w3-margin-left w3-margin-right w3-margin-top w3-padding-large box-shadow"
+           type="submit" value="نوع بلیط"/>
+</form>
+
+
+<form id="formMyPhone">
+    <input class="w3-button w3-pale-red w3-round-large w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="شماره من"/>
+</form>
+
+<form id="formAskMyPhone">
+    <input class="w3-button w3-pale-red w3-round-large w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="اجازه شماره من"/>
+</form>
+
+
+<form id="myUserNameAction">
+    <input class="w3-button w3-pale-yellow w3-round-large w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="نام کاربری من"/>
+</form>
+
+
+<form id="textBoxAction">
+    <input class="w3-button w3-pale-green w3-round-large w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="نام خانوادگی"/>
+</form>
+
+<form id="smsAction">
+    <input class="w3-button w3-pale-red w3-round-large w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="فعال سازی پیامکی"/>
+</form>
+<form id="callAction">
+    <input class="w3-button w3-pale-yellow w3-round-large w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="تماس پشتیبانی"/>
+</form>
+
+<form id="linkAction">
+    <input class="w3-button w3-pale-green w3-round-large w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="خندوانه"/>
+</form>
+
+<form id="alertAction">
+    <input class="w3-button w3-pale-green w3-round-red w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="پیغام"/>
+</form>
+
+<form id="persianCalendarAction">
+    <input class="w3-button w3-pale-green w3-round-red w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="تاریخ رفت هجری"/>
+</form>
+
+<form id="englishCalendarAction">
+    <input class="w3-button w3-pale-green w3-round-red w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="تاریخ برگشت میلادی"/>
+</form>
+<form id="locationAction">
+    <input class="w3-button w3-pale-green w3-round-red w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="انتخاب مکان مبدا"/>
+</form>
+<form id="myLocationAction">
+    <input class="w3-button w3-pale-green w3-round-red w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="مکان من"/>
+</form>
+
+<form id="askMyLocationAction">
+    <input class="w3-button w3-pale-green w3-round-red w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="اجازه مکان من"/>
+</form>
+<form id="askUserToken">
+    <input class="w3-button w3-pale-green w3-round-red w3-margin-left w3-margin-right w3-margin-top w3-padding-large"
+           type="submit" value="توکن من"/>
+</form>
+
+
+</body>
+</html>

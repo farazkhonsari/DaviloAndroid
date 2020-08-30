@@ -87,7 +87,6 @@
                     android:indeterminate="false"
                     android:max="100"
                     android:progress="0"
-
                     android:progressDrawable="@drawable/enroled_module_progress"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

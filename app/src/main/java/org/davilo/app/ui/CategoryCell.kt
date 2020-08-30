@@ -29,5 +29,6 @@ class CategoryCell(
     fun bindCategory(category: Category?) {
         this.category = category
         binding.category = category
+
     }
 }

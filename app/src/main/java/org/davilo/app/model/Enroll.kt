@@ -14,7 +14,7 @@ data class ModuleInfo(
     val id: String,
     val module: String,
     val NumberOfModuleApps: Int,
-    val NumberOfCompleteModuleApps: Int
+    val NumberOfCompletedModuleApps: Int
 
 ) {
     fun getPercentString(): String {
@@ -22,6 +22,6 @@ data class ModuleInfo(
     }
 
     fun getPercent(): Int {
-        return (NumberOfCompleteModuleApps * 100f / NumberOfModuleApps).toInt()
+        return (NumberOfCompletedModuleApps * 100f / NumberOfModuleApps).toInt()
     }
 }

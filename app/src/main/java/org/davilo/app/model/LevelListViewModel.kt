@@ -19,9 +19,10 @@ class LevelListViewModel @ViewModelInject constructor(private val repository: Re
     var isEnrollChanged = MutableLiveData<Boolean>();
     fun loadLevels() {
         if (levels.value != null || request != null) {
-            return
+
+        } else {
+            isLoading.value = true
         }
-        isLoading.value = true
         request = repository.getLevelList()
             .subscribe(
                 { response ->

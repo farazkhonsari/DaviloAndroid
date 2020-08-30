@@ -34,11 +34,19 @@ interface ApiInterface {
         @Header("Authorization") Authorization: String?,
         @Body input: GetLevelListInput
     ): Observable<Output<GetLevelListOutput>>
+
     @POST("./apps/set-enroll/")
     fun setEnroll(
         @Header("Authorization") Authorization: String?,
         @Body input: SetEnrollInput
     ): Observable<Output<SetEnrollOutput>>
+
+    @POST("./apps/complete-app/")
+    fun completeApp(
+        @Header("Authorization") Authorization: String?,
+        @Header("X-Timezone") xTimezone: String? = "Asia/Tehran",
+        @Body input: CompleteAppInput
+    ): Observable<Output<CompleteAppOutput>>
 
 
 }

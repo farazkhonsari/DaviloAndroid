@@ -45,6 +45,11 @@ class AppListFragment : Fragment() {
         initBindings()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initBindings()
+    }
+
     private fun initBindings() {
         homeAdapter = Adapter()
         val linearLayoutManager = LinearLayoutManager(activity)
