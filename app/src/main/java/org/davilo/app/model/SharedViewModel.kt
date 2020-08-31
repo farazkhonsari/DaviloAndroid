@@ -10,18 +10,17 @@ import org.davilo.app.Repository
 /**
  * Created by Abhinav Singh on 17,June,2020
  */
-class CategoryListViewModel @ViewModelInject constructor(private val repository: Repository) :
+class SharedViewModel @ViewModelInject constructor(private val repository: Repository) :
     ViewModel() {
 
     var request: Disposable? = null
     val categories = MutableLiveData<ArrayList<Category>>()
-    val categoriesMap = HashMap<String, App>()
     val isLoading = MutableLiveData<Boolean>()
 
     fun loadCurrentEnroll(objectId: String) {
         if (categories.value != null || request != null) {
 
-        } else {
+        }else{
             isLoading.value = true
         }
 

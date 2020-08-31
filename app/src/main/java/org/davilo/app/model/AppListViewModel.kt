@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.Disposable
 import org.davilo.app.Repository
+import org.davilo.app.main.NotificationCenter
 
 /**
  * Created by Abhinav Singh on 17,June,2020
@@ -14,19 +15,44 @@ class AppListViewModel @ViewModelInject constructor(private val repository: Repo
     ViewModel() {
     var request: Disposable? = null
     val apps = MutableLiveData<ArrayList<App>>()
+    val appsMap = HashMap<String, App>()
     val isLoading = MutableLiveData<Boolean>()
+    var delegate = NotificationCenter.NotificationCenterDelegate { id, args ->
+        if (id == NotificationCenter.appDone) {
+            val appId = args[0]
+            appsMap[appId]?.done = true
+            apps.value = apps.value
+        }
+    }
+
+    init {
+        NotificationCenter.getInstance().addObserver(delegate, NotificationCenter.appDone)
+    }
+
+    override fun onCleared() {
+        NotificationCenter.getInstance().removeObserver(delegate, NotificationCenter.appDone)
+        super.onCleared()
+    }
+
     fun loadCurrentEnroll(objectId: String) {
         apps.value = ArrayList()
         isLoading.value = true
-        request = repository.getAppList(objectId)
+        request = repository.getAppList(objectId).doOnNext { response ->
+            for (app in response) {
+                if (app.id != null) {
+                    appsMap[app.id!!] = app
+                    app.categoryId = objectId
+                }
+            }
+        }
             .subscribe(
                 { response ->
                     request = null
                     isLoading.value = false
-
                     apps.setValue(
                         response
                     )
+
                 }
             ) { error: Throwable ->
                 Log.e(

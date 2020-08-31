@@ -100,6 +100,7 @@ class WebAppActivity : AppCompatActivity() {
 
     fun onAppCompleted() {
         repository.completeApp(app.id).subscribe({}, {})
+        NotificationCenter.getInstance().postNotificationName(NotificationCenter.appDone, app.id)
         SolvedAlertDialog().show()
 
     }

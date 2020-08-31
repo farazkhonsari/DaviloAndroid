@@ -45,11 +45,6 @@ class AppListFragment : Fragment() {
         initBindings()
     }
 
-    override fun onResume() {
-        super.onResume()
-        initBindings()
-    }
-
     private fun initBindings() {
         homeAdapter = Adapter()
         val linearLayoutManager = LinearLayoutManager(activity)
@@ -111,8 +106,6 @@ class AppListFragment : Fragment() {
         }
 
         override fun getItemCount(): Int {
-
-
             return array.size
         }
 
@@ -122,10 +115,13 @@ class AppListFragment : Fragment() {
             }
         }
 
-        fun setApps(apps: ArrayList<App>?) {
+        fun setApps(
+            apps: ArrayList<App>?
+        ) {
             if (apps != null) {
                 this.array = apps
             }
+
             notifyDataSetChanged()
         }
 
@@ -134,5 +130,6 @@ class AppListFragment : Fragment() {
 
         }
     }
+
 
 }
