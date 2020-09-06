@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.webkit.JavascriptInterface
@@ -44,6 +45,7 @@ class WebAppActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+        AndroidUtilities.applicationHandler = Handler(mainLooper);
         app = Gson().fromJson(intent.extras?.getString("json"), App::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_web_app)
         var webView = binding.webApp
@@ -110,7 +112,6 @@ class WebAppActivity : AppCompatActivity() {
         @JavascriptInterface
         fun appDone() {
             AndroidUtilities.runOnUIThread {
-
                 onAppCompleted()
             }
         }
@@ -128,6 +129,9 @@ class WebAppActivity : AppCompatActivity() {
             setView(binding.root)
             binding.root.continueBottom.setOnClickListener { dismiss() }
             setOnDismissListener { finish() }
+
+
+
         }
     }
 

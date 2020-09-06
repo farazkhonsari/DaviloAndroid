@@ -2,8 +2,6 @@ package org.davilo.app.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -19,9 +17,9 @@ import org.davilo.app.R
 import org.davilo.app.main.MainActivity
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val viewModel: RegisterViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         println("constructed")
@@ -31,17 +29,15 @@ class LoginActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
-        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
+        viewModel.registerFormState.observe(this@RegisterActivity, Observer {
             val loginState = it ?: return@Observer
 
             if (loginState.isSignedIn) {
                 finishAffinity()
-                startActivity(
-                    Intent(
-                        this,
-                        MainActivity::class.java
-                    )
-                )
+                var intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("fromRegister", true)
+
+                startActivity(intent)
                 return@Observer
             }
             loading.visibility = if (loginState.isLoading) View.VISIBLE else View.INVISIBLE
@@ -73,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
 //        })
 
         username.afterTextChanged {
-            loginViewModel.loginDataChanged(
+            viewModel.dataChanged(
                 username.text.toString(),
                 password.text.toString()
             )
@@ -81,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
 
         password.apply {
             afterTextChanged {
-                loginViewModel.loginDataChanged(
+                viewModel.dataChanged(
                     username.text.toString(),
                     password.text.toString()
                 )
@@ -90,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
+                        viewModel.login(
                             username.text.toString(),
                             password.text.toString()
                         )
@@ -100,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
 
             login.setOnClickListener {
 
-                loginViewModel.login(username.text.toString(), password.text.toString())
+                viewModel.login(username.text.toString(), password.text.toString())
             }
         }
     }
@@ -112,14 +108,3 @@ class LoginActivity : AppCompatActivity() {
 }
 
 
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
-        }
-
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-    })
-}

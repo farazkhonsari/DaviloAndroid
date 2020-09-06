@@ -10,6 +10,9 @@ interface ApiInterface {
     @POST("./users/sign-in/")
     fun login(@Body loginInput: LoginInput): Observable<OutputArrat<LoginOutput>>
 
+    @POST("./users/sign-up/")
+    fun register(@Body input: RegisterInput): Observable<OutputArrat<RegisterOutput>>
+
 
     @POST("./apps/get-current-enroll/")
     fun getCurrentEnroll(

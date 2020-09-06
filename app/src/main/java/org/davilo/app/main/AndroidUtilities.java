@@ -38,7 +38,7 @@ public class AndroidUtilities {
     public static boolean isInMultiwindow;
     private static Boolean isTablet = null;
     private static int adjustOwnerClassGuid = 0;
-    private static Handler applicationHandler = new Handler();
+    public static Handler applicationHandler=null;
 
 
     public static byte[] getStringBytes(String src) {

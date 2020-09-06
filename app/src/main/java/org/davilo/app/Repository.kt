@@ -16,6 +16,7 @@ class Repository @Inject constructor(
             Authorization = "Bearer" + " " + appPreferences.getToken(), input =
             GetCurrentEnrollInput(user_id = appPreferences.getUserId())
         ).subscribeOn(Schedulers.io())
+            .compose(RxHelper().addRegularRetryAndDelay())
             .observeOn(AndroidSchedulers.mainThread()).flatMap { response ->
                 Observable.just(response.outputData)
             }
@@ -26,8 +27,9 @@ class Repository @Inject constructor(
             Authorization = "Bearer" + " " + appPreferences.getToken(), input =
             GetCategoryListInput(user_id = appPreferences.getUserId(), object_id = moduleId)
         ).subscribeOn(Schedulers.io())
+            .compose(RxHelper().addRegularRetryAndDelay())
             .observeOn(AndroidSchedulers.mainThread()).flatMap { response ->
-                Observable.just(response.outputData.module.categories)
+                Observable.just(response.outputData!!.module.categories)
             }
     }
 
@@ -36,8 +38,10 @@ class Repository @Inject constructor(
             Authorization = "Bearer" + " " + appPreferences.getToken(), input =
             GetAppsListInput(user_id = appPreferences.getUserId(), object_id = categoryId)
         ).subscribeOn(Schedulers.io())
+
+            .compose(RxHelper().addRegularRetryAndDelay())
             .observeOn(AndroidSchedulers.mainThread()).flatMap { response ->
-                Observable.just(response.outputData.category.apps)
+                Observable.just(response.outputData!!.category.apps)
             }
     }
 
@@ -46,8 +50,9 @@ class Repository @Inject constructor(
             Authorization = "Bearer" + " " + appPreferences.getToken(), input =
             GetLevelListInput(user_id = appPreferences.getUserId())
         ).subscribeOn(Schedulers.io())
+            .compose(RxHelper().addRegularRetryAndDelay())
             .observeOn(AndroidSchedulers.mainThread()).flatMap { response ->
-                Observable.just(response.outputData.levels)
+                Observable.just(response.outputData!!.levels)
             }
     }
 
@@ -56,6 +61,7 @@ class Repository @Inject constructor(
             Authorization = "Bearer" + " " + appPreferences.getToken(), input =
             SetEnrollInput(user_id = appPreferences.getUserId(), level_id = levelId)
         ).subscribeOn(Schedulers.io())
+            .compose(RxHelper().addRegularRetryAndDelay())
             .observeOn(AndroidSchedulers.mainThread()).flatMap {
                 Observable.just(1)
             }
@@ -66,6 +72,7 @@ class Repository @Inject constructor(
             Authorization = "Bearer" + " " + appPreferences.getToken(), input =
             CompleteAppInput(app_id = appId)
         ).subscribeOn(Schedulers.io())
+            .compose(RxHelper().addRegularRetryAndDelay())
             .observeOn(AndroidSchedulers.mainThread()).flatMap {
                 Observable.just(1)
             }

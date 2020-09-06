@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.davilo.app.R
 import org.davilo.app.databinding.ActivityMainBinding
 import org.davilo.app.model.AppPreferences
-import org.davilo.app.ui.login.LoginActivity
+import org.davilo.app.ui.login.IntroActivity
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,12 +29,18 @@ class MainActivity : AppCompatActivity() {
         val token = appPreferences.getString(AppPreferences.Key.Token)
         if (token == null || token.isEmpty()) {
             finish()
-            startActivity(Intent(this, LoginActivity::class.java))
+            var intent = Intent(this, IntroActivity::class.java)
+
+            startActivity(intent)
         }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
+        if (intent.getBooleanExtra("fromRegister", false)) {
+            binding.bottomNav.selectedItemId = R.id.nav_level;
+        }
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -62,7 +68,8 @@ class MainActivity : AppCompatActivity() {
 
         // Whenever the selected controller changes, setup the action bar.
         controller.observe(this, Observer { navController ->
-           setupActionBarWithNavController(navController) })
+            setupActionBarWithNavController(navController)
+        })
 
         currentNavController = controller
 

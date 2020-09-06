@@ -12,8 +12,9 @@ enum class AppType {
     MatchingPairs,
     MatchingPairsOnImage,
     FreeTextInput,
-    Crossword,
+    Crosword,
     TheMillionAirGame,
     HangMan,
-    QuizWithTextInput
+    QuizWithTextInput,
+    PairingGame
 }

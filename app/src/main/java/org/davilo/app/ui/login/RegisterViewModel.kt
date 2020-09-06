@@ -11,7 +11,7 @@ import org.davilo.app.R
 import org.davilo.app.model.AppPreferences
 import org.davilo.app.model.LoginOutput
 
-class LoginViewModel @ViewModelInject constructor(
+class RegisterViewModel @ViewModelInject constructor(
     val loginRepository: LoginRepository,
     val appPreferences: AppPreferences
 ) :
@@ -22,12 +22,13 @@ class LoginViewModel @ViewModelInject constructor(
     private var password: String = ""
     private var loginObserver: Disposable? = null
     private val _loginForm = MutableLiveData<LoginFormState>()
-    val loginFormState: LiveData<LoginFormState> = _loginForm
+    val registerFormState: LiveData<LoginFormState> = _loginForm
 
 
     fun login(username: String, password: String) {
 
-        loginObserver = loginRepository.login(email = username, password = password)
+        loginObserver = loginRepository.register(email = username, password = password)
+            .flatMap { loginRepository.login(email = username, password = password) }
             .subscribe(
                 { response ->
                     loginObserver = null
@@ -53,7 +54,7 @@ class LoginViewModel @ViewModelInject constructor(
         appPreferences.setString(AppPreferences.Key.UserId, response.user.id)
     }
 
-    fun loginDataChanged(username: String, password: String) {
+    fun dataChanged(username: String, password: String) {
         this.username = username
         this.password = password
         invalidateLoginFormState()

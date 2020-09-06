@@ -5,19 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import org.davilo.app.R
 import org.davilo.app.databinding.LevelFragmentListBinding
 import org.davilo.app.model.Level
 import org.davilo.app.model.LevelListViewModel
-import org.davilo.app.ui.CategoryCell
 import org.davilo.app.ui.LevelCell
 
 @AndroidEntryPoint
@@ -97,12 +93,8 @@ class LevelListFragment : Fragment() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             view?.setOnClickListener { view ->
-                var cell = view as CategoryCell
-                val bundle = bundleOf(
-                    "object_id" to (cell.category?.id ?: "")
-                )
-                Navigation.findNavController(view)
-                    .navigate(R.id.go_to_apps, bundle)
+                var cell = view as LevelCell
+                viewModel.enrollLevel(cell.level)
             }
             view?.delegate = object : LevelCell.Delegate {
 

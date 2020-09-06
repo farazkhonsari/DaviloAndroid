@@ -62,11 +62,15 @@ class AppCell(
             AppType.GroupPuzzle -> {
                 binding.imageViewApp.setImageResource(R.drawable.ic_app_group_puzzle)
             }
-            AppType.Crossword -> {
+            AppType.Crosword -> {
                 binding.imageViewApp.setImageResource(R.drawable.ic_app_crossword)
             }
             AppType.MarkInTexts -> {
                 binding.imageViewApp.setImageResource(R.drawable.ic_app_mark_in_text)
+            }
+
+            AppType.PairingGame -> {
+                binding.imageViewApp.setImageResource(R.drawable.ic_app_pairing);
             }
             AppType.FillTable -> {
                 binding.imageViewApp.setImageResource(R.drawable.ic_app_filltable)
@@ -79,9 +83,10 @@ class AppCell(
             }
             AppType.HangMan -> {
                 binding.imageViewApp.setImageResource(R.drawable.ic_app_hangman)
-            } AppType.QuizWithTextInput -> {
-            binding.imageViewApp.setImageResource(R.drawable.ic_app_quiz_with_textinput)
-        }
+            }
+            AppType.QuizWithTextInput -> {
+                binding.imageViewApp.setImageResource(R.drawable.ic_app_quiz_with_textinput)
+            }
             else -> {
                 binding.imageViewApp.setImageDrawable(null);
             }
