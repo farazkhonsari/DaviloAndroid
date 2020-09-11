@@ -17,6 +17,7 @@
             app:popExitAnim="@anim/alpha_out" />
     </fragment>
 
+
     <fragment
         android:id="@+id/categories"
         android:name="org.davilo.app.main.CategoryListFragment"

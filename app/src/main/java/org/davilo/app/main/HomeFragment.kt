@@ -31,7 +31,6 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     var enroll: Enroll? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,6 +52,10 @@ class HomeFragment : Fragment() {
             layoutManager = linearLayoutManager
 
         }
+        binding.showLevels.setOnClickListener {
+            (activity as MainActivity).showLevelsTab()
+
+        }
         observeData()
         viewModel.loadCurrentEnroll()
     }
@@ -69,6 +72,17 @@ class HomeFragment : Fragment() {
                 binding.loading.hide()
             }
         })
+        viewModel.isNotEnrolled.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.notEnrolledContainer.visibility = View.VISIBLE
+                binding.homePhotosList.visibility = View.GONE
+            } else {
+                binding.notEnrolledContainer.visibility = View.GONE
+                binding.homePhotosList.visibility = View.VISIBLE
+            }
+        })
+
+
     }
 
 
@@ -93,7 +107,6 @@ class HomeFragment : Fragment() {
                         .navigate(R.id.go_to_category, bundle)
                 }
             }
-
 
             return Holder(view!!)
 

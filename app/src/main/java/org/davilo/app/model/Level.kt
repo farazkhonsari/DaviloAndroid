@@ -9,6 +9,6 @@ data class Level(
     val description: String?
 ) {
     fun getNumberOfAppsString(): String {
-        return total_apps.toString() + " " + "Apps"
+        return total_apps.toString() + " " + "Mini Davilo"
     }
 }

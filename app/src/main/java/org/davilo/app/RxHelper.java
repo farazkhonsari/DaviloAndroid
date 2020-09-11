@@ -10,6 +10,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.ObservableTransformer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.HttpException;
 
 public class RxHelper {
     public <T> ObservableTransformer<T, T> applySchedulers() {
@@ -63,8 +64,15 @@ public class RxHelper {
             public ObservableSource<T> apply(Observable<T> observable) {
                 return observable.retryWhen(errors -> {
                     return errors.zipWith(Observable.range(1, 1 + delay.length), (error, i) -> {
-                        if (i >= 1 + delay.length) {
-                            throw new Exception(error);
+                        boolean forceThrow = false;
+                        if (error instanceof HttpException) {
+                            int code = ((HttpException) error).code();
+                            if (code <= 501) {
+                                forceThrow = true;
+                            }
+                        }
+                        if (i >= 1 + delay.length || forceThrow) {
+                            throw error;
                         }
                         return i;
 
@@ -128,7 +136,6 @@ public class RxHelper {
 
         };
     }
-
 
 
 }

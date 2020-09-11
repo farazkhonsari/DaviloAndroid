@@ -23,11 +23,11 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         println("constructed")
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_register)
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
-        val login = findViewById<Button>(R.id.login)
+        val login = findViewById<Button>(R.id.register)
         val loading = findViewById<ProgressBar>(R.id.loading)
         viewModel.registerFormState.observe(this@RegisterActivity, Observer {
             val loginState = it ?: return@Observer

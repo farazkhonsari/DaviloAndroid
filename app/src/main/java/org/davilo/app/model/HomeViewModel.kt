@@ -12,10 +12,11 @@ import org.davilo.app.Repository
  */
 class HomeViewModel @ViewModelInject constructor(private val repository: Repository) :
     ViewModel() {
+
     var request: Disposable? = null
     val currentEnroll = MutableLiveData<Enroll>()
     val isLoading = MutableLiveData<Boolean>()
-
+    val isNotEnrolled = MutableLiveData(false)
     fun loadCurrentEnroll() {
 
         if (request != null || currentEnroll.value != null) {
@@ -33,6 +34,7 @@ class HomeViewModel @ViewModelInject constructor(private val repository: Reposit
                 }
             ) { error: Throwable ->
                 isLoading.value = false
+                isNotEnrolled.value=true
                 Log.e(
                     TAG,
                     "getPokemons: " + error.message

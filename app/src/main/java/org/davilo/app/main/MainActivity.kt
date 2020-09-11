@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 import org.davilo.app.R
 import org.davilo.app.databinding.ActivityMainBinding
 import org.davilo.app.model.AppPreferences
@@ -77,5 +78,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
+    }
+
+    fun showLevelsTab() {
+        bottom_nav.selectedItemId=R.id.nav_level
     }
 }

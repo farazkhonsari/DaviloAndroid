@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.davilo.app.databinding.LevelFragmentListBinding
 import org.davilo.app.model.Level
 import org.davilo.app.model.LevelListViewModel
+import org.davilo.app.ui.HintCell
 import org.davilo.app.ui.LevelCell
 
 @AndroidEntryPoint
@@ -86,39 +87,59 @@ class LevelListFragment : Fragment() {
     inner class Adapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         var array: ArrayList<Level> = ArrayList()
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            var view: LevelCell? =
-                this@LevelListFragment.context?.let { LevelCell(context = it) }
-            view?.layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-            view?.setOnClickListener { view ->
-                var cell = view as LevelCell
-                viewModel.enrollLevel(cell.level)
-            }
-            view?.delegate = object : LevelCell.Delegate {
+            var resultView:View?=null
+            if (viewType == 0) {
+                var view: HintCell? =
+                    this@LevelListFragment.context?.let { HintCell(context = it) }
+                resultView=view
+                view?.layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
 
-                override fun onEnrollSelected(level: Level?) {
-                    viewModel.enrollLevel(level)
+            } else if (viewType == 1) {
+                var view: LevelCell? =
+                    this@LevelListFragment.context?.let { LevelCell(context = it) }
+                resultView=view
+                view?.layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+                view?.setOnClickListener { view ->
+                    var cell = view as LevelCell
+                    viewModel.enrollLevel(cell.level)
+                }
+                view?.delegate = object : LevelCell.Delegate {
+
+                    override fun onEnrollSelected(level: Level?) {
+                        viewModel.enrollLevel(level)
+                    }
+
+
                 }
 
-
             }
 
 
-            return Holder(view!!)
+            return Holder(resultView!!)
 
         }
 
         override fun getItemCount(): Int {
-
-
-            return array.size
+            return array.size + 1
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             if (holder.itemView is LevelCell) {
-                (holder.itemView as LevelCell).bindLevel(array[position])
+                (holder.itemView as LevelCell).bindLevel(array[position-1])
+            }
+        }
+
+        override fun getItemViewType(position: Int): Int {
+            return if (position == 0) {
+                0;
+            } else {
+                1;
             }
         }
 

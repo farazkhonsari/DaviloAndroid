@@ -101,6 +101,8 @@ dependencies {
     def cardview_version = "1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
 
+    implementation 'com.airbnb.android:lottie:3.4.2'
+
     // Testing dependencies
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
