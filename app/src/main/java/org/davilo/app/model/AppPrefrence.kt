@@ -10,6 +10,7 @@ public class AppPreferences @Inject constructor(@ApplicationContext context: Con
 
     enum class Key {
         Token,
+        Email,
         UserId,
     }
 

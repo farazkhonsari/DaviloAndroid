@@ -1,4 +1,5 @@
 package org.davilo.app.main
+
 import android.content.Intent
 import android.util.SparseArray
 import androidx.core.util.forEach
@@ -83,10 +84,10 @@ fun BottomNavigationView.setupWithNavController(
                     FragmentManager.POP_BACK_STACK_INCLUSIVE
                 )
                 val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
-                        as NavHostFragment
+                        as NavHostFragment?
 
                 // Exclude the first fragment tag because it's always in the back stack.
-                if (firstFragmentTag != newlySelectedItemTag) {
+                if (selectedFragment != null && firstFragmentTag != newlySelectedItemTag) {
                     // Commit a transaction that cleans the back stack and adds the first fragment
                     // to it, creating the fixed started destination.
                     fragmentManager.beginTransaction()
@@ -112,7 +113,7 @@ fun BottomNavigationView.setupWithNavController(
                 }
                 selectedItemTag = newlySelectedItemTag
                 isOnFirstFragment = selectedItemTag == firstFragmentTag
-                selectedNavController.value = selectedFragment.navController
+                selectedNavController.value = selectedFragment?.navController
                 true
             } else {
                 false

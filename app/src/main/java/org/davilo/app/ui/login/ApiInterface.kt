@@ -2,6 +2,7 @@ package org.davilo.app.ui.login
 
 import io.reactivex.rxjava3.core.Observable
 import org.davilo.app.model.*
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -11,7 +12,7 @@ interface ApiInterface {
     fun login(@Body loginInput: LoginInput): Observable<OutputArrat<LoginOutput>>
 
     @POST("./users/sign-up/")
-    fun register(@Body input: RegisterInput): Observable<OutputArrat<RegisterOutput>>
+    fun register(@Body input: RegisterInput): Observable<Response<OutputArrat<RegisterOutput>>>
 
 
     @POST("./apps/get-current-enroll/")

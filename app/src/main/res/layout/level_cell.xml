@@ -54,6 +54,7 @@
                     android:id="@+id/textViewCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
                     android:gravity="center"
                     android:text="@{level.numberOfAppsString}"
                     android:textColor="#626262"
@@ -64,9 +65,28 @@
                     app:layout_constraintTop_toBottomOf="@id/textViewName" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewCountLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:gravity="center"
+                    android:text="Mini-Davilos"
+                    android:textColor="#626262"
+                    app:layout_constraintVertical_bias="0.6"
+                    android:textSize="12sp"
+                    android:paddingLeft="4dp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/textViewCount"
+                    app:layout_constraintLeft_toRightOf="@id/textViewCount"
+                    app:layout_constraintTop_toTopOf="@id/textViewCount" />
+
+
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewLevelDescription"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
                     android:gravity="start"
                     android:text="@{level.description}"
                     android:textColor="#626262"
@@ -81,7 +101,7 @@
                 <ProgressBar
                     android:id="@+id/progressBar"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_width="302dp"
+                    android:layout_width="0dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="8dp"
                     android:indeterminate="false"

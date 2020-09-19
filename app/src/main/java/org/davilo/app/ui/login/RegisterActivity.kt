@@ -50,6 +50,11 @@ class RegisterActivity : AppCompatActivity() {
             if (loginState.passwordError != null) {
                 password.error = getString(loginState.passwordError)
             }
+            if (loginState.passwordErrorString != null) {
+
+                password.error = loginState.passwordErrorString
+                password.requestFocus()
+            }
 
         })
 
@@ -86,7 +91,7 @@ class RegisterActivity : AppCompatActivity() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
-                        viewModel.login(
+                        viewModel.register(
                             username.text.toString(),
                             password.text.toString()
                         )
@@ -96,7 +101,7 @@ class RegisterActivity : AppCompatActivity() {
 
             login.setOnClickListener {
 
-                viewModel.login(username.text.toString(), password.text.toString())
+                viewModel.register(username.text.toString(), password.text.toString())
             }
         }
     }

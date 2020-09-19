@@ -2,6 +2,7 @@ package org.davilo.app.main
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -98,8 +99,16 @@ class WebAppActivity : AppCompatActivity() {
         binding.buttonDone.setOnClickListener {
             onAppCompleted()
         }
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayShowHomeEnabled(true);
+
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
     fun onAppCompleted() {
         repository.completeApp(app.id).subscribe({}, {})
         NotificationCenter.getInstance().postNotificationName(NotificationCenter.appDone, app.id)
@@ -135,6 +144,9 @@ class WebAppActivity : AppCompatActivity() {
         }
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+    }
     override fun onDestroy() {
         binding.webApp.destroy()
         super.onDestroy()

@@ -9,7 +9,7 @@
     <string name="action_register_in_short">Register</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid Email</string>
-    <string name="invalid_password">Password must be >8 characters</string>
+    <string name="invalid_password">Password must be >8 characters and contain a number and a letter</string>
     <string name="login_failed">"Login failed"</string>
 
     <string name="hello_info_fragment">Hello Info fragment</string>
@@ -20,4 +20,12 @@
     <string name="start_message_not_enrolled">As a first step for using Davilo, Enroll in a Level</string>
     <string name="action_go_to_levelsTab">Show Levels</string>
     <string name="hint_message_level">Enroll in a new level or Continue a level that was enrolled before.</string>
+    <string name="levels">Levels</string>
+    <string name="MyDavilo">My Davilo</string>
+    <string name="LoggedInDescription">"You have signed in with *num1* All of your progress will be saved, no worry about logout"</string>
+    <string name="action_log_out">logout</string>
+    <string name="favorite">Favorites</string>
+    <string name="aboutUs">About us</string>
+    <string name="support">Support</string>
+
 </resources>

@@ -1,13 +1,12 @@
 package org.davilo.app.ui.login
 
+import android.util.Log
+import com.google.gson.Gson
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.davilo.app.RxHelper
-import org.davilo.app.model.LoginInput
-import org.davilo.app.model.LoginOutput
-import org.davilo.app.model.ProfileInput
-import org.davilo.app.model.RegisterInput
+import org.davilo.app.model.*
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(private val apiInterface: ApiInterface) {
@@ -35,7 +34,14 @@ class LoginRepository @Inject constructor(private val apiInterface: ApiInterface
             .subscribeOn(Schedulers.io())
             .compose(RxHelper().addRegularRetryAndDelay())
             .observeOn(AndroidSchedulers.mainThread()).flatMap { response ->
+                if(!response.isSuccessful ){
+                    var output=Gson().fromJson(response.errorBody()?.string(),Output::class.java)
+                    Log.e("register","register"+output.status.status_message)
+                    throw ServerException(output)
+                }
                 Observable.just(1)
             }
     }
 }
+
+

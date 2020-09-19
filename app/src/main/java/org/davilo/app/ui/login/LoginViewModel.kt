@@ -51,6 +51,9 @@ class LoginViewModel @ViewModelInject constructor(
     private fun onResponse(response: LoginOutput) {
         appPreferences.setString(AppPreferences.Key.Token, response.token)
         appPreferences.setString(AppPreferences.Key.UserId, response.user.id)
+        appPreferences.setString(AppPreferences.Key.Email, username)
+
+
     }
 
     fun loginDataChanged(username: String, password: String) {

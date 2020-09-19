@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
-        if (intent.getBooleanExtra("fromRegister", false)) {
-            binding.bottomNav.selectedItemId = R.id.nav_level;
-        }
+//        if (intent.getBooleanExtra("fromRegister", false)) {
+//            binding.bottomNav.selectedItemId = R.id.nav_level;
+//        }
 
     }
 
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = binding.bottomNav
-        val navGraphIds = listOf(R.navigation.nav_graph_home, R.navigation.nav_graph_info)
+        val navGraphIds = listOf(R.navigation.nav_graph_home, R.navigation.nav_graph_info,R.navigation.nav_graph_setting)
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(

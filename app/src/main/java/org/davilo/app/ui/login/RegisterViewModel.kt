@@ -25,7 +25,7 @@ class RegisterViewModel @ViewModelInject constructor(
     val registerFormState: LiveData<LoginFormState> = _loginForm
 
 
-    fun login(username: String, password: String) {
+    fun register(username: String, password: String) {
 
         loginObserver = loginRepository.register(email = username, password = password)
             .flatMap { loginRepository.login(email = username, password = password) }
@@ -46,12 +46,16 @@ class RegisterViewModel @ViewModelInject constructor(
     }
 
     private fun onFailure(action: Throwable?) {
-
+        if (action is ServerException) {
+            _loginForm.value =
+                LoginFormState(passwordErrorString = (action as ServerException).output?.status?.status_message)
+        }
     }
 
     private fun onResponse(response: LoginOutput) {
         appPreferences.setString(AppPreferences.Key.Token, response.token)
         appPreferences.setString(AppPreferences.Key.UserId, response.user.id)
+        appPreferences.setString(AppPreferences.Key.Email, response.user.id)
     }
 
     fun dataChanged(username: String, password: String) {
@@ -78,7 +82,7 @@ class RegisterViewModel @ViewModelInject constructor(
         return if (username.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
         } else {
-            username.isNotBlank()
+            false
         }
     }
 
