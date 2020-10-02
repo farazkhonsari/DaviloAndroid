@@ -9,4 +9,5 @@
     <color name="colorSecondaryText">#757575</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="white_background">#ffffff</color>
+    <color name="backgroundDictionaryHeaderRow">#6613C095</color>
 </resources>

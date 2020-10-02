@@ -5,8 +5,8 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.Disposable
-import org.davilo.app.Repository
-import org.davilo.app.main.NotificationCenter
+import org.davilo.app.di.network.repository.Repository
+import org.davilo.app.utils.NotificationCenter
 
 /**
  * Created by Abhinav Singh on 17,June,2020

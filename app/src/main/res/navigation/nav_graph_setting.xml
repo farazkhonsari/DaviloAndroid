@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/setting_dest"
-        android:name="org.davilo.app.main.SettingFragment"
+        android:name="org.davilo.app.ui.fragment.SettingFragment"
         android:label="@string/MyDavilo"
         tools:layout="@layout/fragment_setting">
 

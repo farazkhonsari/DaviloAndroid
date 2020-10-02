@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home_dest"
-        android:name="org.davilo.app.main.HomeFragment"
+        android:name="org.davilo.app.ui.fragment.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/categories"
-        android:name="org.davilo.app.main.CategoryListFragment"
+        android:name="org.davilo.app.ui.fragment.CategoryListFragment"
         android:label="Category"
         app:enterAnim="@anim/alpha_in"
         app:popExitAnim="@anim/alpha_out"
@@ -29,9 +29,10 @@
             android:id="@+id/go_to_apps"
             app:destination="@id/apps" />
     </fragment>
+
     <fragment
         android:id="@+id/apps"
-        android:name="org.davilo.app.main.AppListFragment"
+        android:name="org.davilo.app.ui.fragment.AppListFragment"
         android:label="Apps"
         app:enterAnim="@anim/alpha_in"
         app:popExitAnim="@anim/alpha_out"

@@ -5,7 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.Disposable
-import org.davilo.app.Repository
+import org.davilo.app.di.network.repository.Repository
 
 /**
  * Created by Abhinav Singh on 17,June,2020
@@ -16,7 +16,7 @@ class LevelListViewModel @ViewModelInject constructor(private val repository: Re
     var request: Disposable? = null
     val levels = MutableLiveData<ArrayList<Level>>()
     val isLoading = MutableLiveData<Boolean>()
-    var isEnrollChanged = MutableLiveData<Boolean>();
+    var isEnrollChanged = MutableLiveData<Boolean>()
     fun loadLevels() {
         if (levels.value != null || request != null) {
 

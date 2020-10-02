@@ -2,6 +2,7 @@ package org.davilo.app.model
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+import org.davilo.app.di.prefrence.AppPreferences
 
 
 class SettingViewModel @ViewModelInject constructor(val appPreferences: AppPreferences) :
