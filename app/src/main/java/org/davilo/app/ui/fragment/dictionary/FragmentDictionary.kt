@@ -19,10 +19,10 @@ import org.davilo.app.R
 import org.davilo.app.databinding.CellDictionaryBinding
 import org.davilo.app.databinding.FragmentDictionaryBinding
 import org.davilo.app.model.WordInfo
-import org.davilo.app.ui.activity.login.afterTextChanged
 import org.davilo.app.ui.adapter.myBindingAdapter.MyBindingAdapter
 import org.davilo.app.ui.base.BaseFragment
 import org.davilo.app.utils.AndroidUtilities
+import org.davilo.app.utils.afterTextChanged
 
 
 @AndroidEntryPoint

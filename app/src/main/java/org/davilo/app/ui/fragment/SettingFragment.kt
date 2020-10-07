@@ -1,7 +1,6 @@
 package org.davilo.app.ui.fragment
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +14,10 @@ import org.davilo.app.R
 import org.davilo.app.databinding.FragmentSettingBinding
 import org.davilo.app.model.Enroll
 import org.davilo.app.model.SettingViewModel
-import org.davilo.app.ui.activity.IntroActivity
+import org.davilo.app.ui.activity.intro.ActivityIntro
 import org.davilo.app.ui.viewHolder.SettingHeaderCell
 import org.davilo.app.ui.viewHolder.SettingSimpleRowCell
+import org.davilo.app.utils.urlBrowserIntent
 
 
 @AndroidEntryPoint
@@ -58,7 +58,8 @@ class SettingFragment : Fragment() {
     inner class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private var contactUsRow: Int
         private var aboutUsRow: Int
-        private var favoritesRow: Int
+
+        //        private var favoritesRow: Int
         private var headerRow: Int
 
         private var rowCount: Int = 0
@@ -67,7 +68,7 @@ class SettingFragment : Fragment() {
         init {
             rowCount = 0
             headerRow = rowCount++
-            favoritesRow = rowCount++
+//            favoritesRow = rowCount++
             aboutUsRow = rowCount++
             contactUsRow = rowCount++
         }
@@ -87,7 +88,7 @@ class SettingFragment : Fragment() {
                 view?.binding?.logout?.setOnClickListener {
                     viewModel.logOut()
                     activity?.finishAffinity()
-                    activity?.startActivity(Intent(context, IntroActivity::class.java))
+                    ActivityIntro.navigate(activity)
                 }
                 return Holder(view!!)
             } else {
@@ -101,6 +102,9 @@ class SettingFragment : Fragment() {
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 )
+                view?.setOnClickListener {
+                    urlBrowserIntent(context, "https://davilo.org")
+                }
                 return Holder(view!!)
             }
 
@@ -121,12 +125,12 @@ class SettingFragment : Fragment() {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             if (holder.itemView is SettingSimpleRowCell) {
                 when (position) {
-                    favoritesRow -> {
-                        (holder.itemView as SettingSimpleRowCell).setValue(
-                            R.drawable.ic_favourite,
-                            R.string.favorite
-                        )
-                    }
+//                    favoritesRow -> {
+//                        (holder.itemView as SettingSimpleRowCell).setValue(
+//                            R.drawable.ic_favourite,
+//                            R.string.favorite
+//                        )
+//                    }
                     aboutUsRow -> {
                         (holder.itemView as SettingSimpleRowCell).setValue(
                             R.drawable.ic_information,
@@ -135,7 +139,7 @@ class SettingFragment : Fragment() {
                     }
                     contactUsRow -> {
                         (holder.itemView as SettingSimpleRowCell).setValue(
-                            R.drawable.ic_transparent,
+                            R.drawable.ic_support,
                             R.string.support
                         )
                     }

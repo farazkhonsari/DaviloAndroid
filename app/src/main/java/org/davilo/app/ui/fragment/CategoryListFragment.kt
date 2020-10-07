@@ -16,7 +16,7 @@ import org.davilo.app.R
 import org.davilo.app.databinding.CategoryFragmentListBinding
 import org.davilo.app.model.Category
 import org.davilo.app.model.CategoryListViewModel
-import org.davilo.app.ui.activity.main.MainActivity
+import org.davilo.app.ui.activity.main.ActivityMain
 import org.davilo.app.ui.viewHolder.CategoryCell
 
 @AndroidEntryPoint
@@ -55,7 +55,7 @@ class CategoryListFragment : Fragment() {
             layoutManager = linearLayoutManager
 
         }
-        (activity as MainActivity).supportActionBar?.title = objectName
+        (activity as ActivityMain).supportActionBar?.title = objectName
         observeData()
         viewModel.loadCurrentEnroll(objectId)
     }

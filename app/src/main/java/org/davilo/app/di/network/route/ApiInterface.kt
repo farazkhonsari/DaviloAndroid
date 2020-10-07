@@ -8,10 +8,16 @@ import retrofit2.http.*
 interface ApiInterface {
 
     @POST("./users/sign-in/")
-    fun login(@Body loginInput: LoginInput): Observable<OutputArrat<LoginOutput>>
+    fun login(@Body loginInput: LoginInput): Observable<Response<OutputArrat<LoginOutput>>>
 
     @POST("./users/sign-up/")
     fun register(@Body input: RegisterInput): Observable<Response<OutputArrat<RegisterOutput>>>
+
+    @POST("./users/confirm-email/")
+    fun confirmEmail(@Body loginInput: ConfirmEmailInput): Observable<Response<Output<String>>>
+
+    @POST("./users/send-confirmaton-email/")
+    fun sendConfirmationEmail(@Body input: SendConfirmationEmailInput): Observable<Output<String>>
 
 
     @POST("./apps/get-current-enroll/")

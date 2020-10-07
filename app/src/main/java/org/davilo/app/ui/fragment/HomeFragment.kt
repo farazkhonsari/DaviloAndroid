@@ -19,7 +19,7 @@ import org.davilo.app.databinding.FragmentHomeBindingImpl
 import org.davilo.app.model.Enroll
 import org.davilo.app.model.HomeViewModel
 import org.davilo.app.model.ModuleInfo
-import org.davilo.app.ui.activity.main.MainActivity
+import org.davilo.app.ui.activity.main.ActivityMain
 import org.davilo.app.ui.viewHolder.Delegate
 import org.davilo.app.ui.viewHolder.EnrolledLevelCell
 
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
 
         }
         binding.showLevels.setOnClickListener {
-            (activity as MainActivity).showLevelsTab()
+            (activity as ActivityMain).showLevelsTab()
 
         }
         observeData()

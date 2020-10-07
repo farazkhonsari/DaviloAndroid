@@ -9,5 +9,8 @@ data class LoginFormState(
     val passwordErrorString: String? = null,
     val isDataValid: Boolean = false,
     val isLoading: Boolean = false,
-    val isSignedIn: Boolean = false
+    val isSignedIn: Boolean = false,
+    val isVerified: Boolean = false,
+    val email: String? = null,
+    val password: String? = null
 )

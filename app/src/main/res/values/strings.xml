@@ -28,5 +28,8 @@
     <string name="aboutUs">About us</string>
     <string name="support">Support</string>
     <string name="dictionary">Dictionary</string>
+    <string name="confirmation_code">Code</string>
+    <string name="action_submit">Submit</string>
+    <string name="action_resendCode">Resend Code</string>
 
 </resources>

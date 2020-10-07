@@ -12,6 +12,7 @@ class AppPreferences @Inject constructor(@ApplicationContext context: Context) {
         Token,
         Email,
         UserId,
+        ConfirmationRemainingTime
     }
 
     fun getToken(): String? {

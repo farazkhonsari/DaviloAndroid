@@ -1,6 +1,5 @@
 package org.davilo.app.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.davilo.app.databinding.AppFragmentListBinding
 import org.davilo.app.model.App
 import org.davilo.app.model.AppListViewModel
-import org.davilo.app.ui.activity.WebAppActivity
-import org.davilo.app.ui.activity.main.MainActivity
+import org.davilo.app.ui.activity.main.ActivityMain
+import org.davilo.app.ui.activity.webApp.ActivityWebApp
 import org.davilo.app.ui.viewHolder.AppCell
 
 @AndroidEntryPoint
@@ -57,7 +56,7 @@ class AppListFragment : Fragment() {
         }
         observeData()
         viewModel.loadCurrentEnroll(objectId)
-        (activity as MainActivity).supportActionBar?.title = objectName
+        (activity as ActivityMain).supportActionBar?.title = objectName
     }
 
     private fun observeData() {
@@ -87,7 +86,9 @@ class AppListFragment : Fragment() {
 
 
     inner class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
         var array: ArrayList<App> = ArrayList()
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             var view: AppCell? =
                 this@AppListFragment.context?.let {
@@ -100,12 +101,8 @@ class AppListFragment : Fragment() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
 
-            view?.setOnClickListener { view ->
-                var intent = Intent(context, WebAppActivity::class.java)
-                intent.putExtra(
-                    "json", Gson().toJson((view as AppCell).app)
-                )
-                startActivity(intent)
+            view?.setOnClickListener { appCell ->
+                ActivityWebApp.navigate(context, Gson().toJson((appCell as AppCell).app))
             }
             return Holder(view!!)
 

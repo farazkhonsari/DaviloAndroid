@@ -1,6 +1,5 @@
 package org.davilo.app.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.davilo.app.databinding.LevelFragmentListBinding
 import org.davilo.app.model.Level
 import org.davilo.app.model.LevelListViewModel
-import org.davilo.app.ui.activity.main.MainActivity
+import org.davilo.app.ui.activity.main.ActivityMain
 import org.davilo.app.ui.viewHolder.HintCell
 import org.davilo.app.ui.viewHolder.LevelCell
 
@@ -72,8 +71,7 @@ class LevelListFragment : Fragment() {
         viewModel.isEnrollChanged.observe(viewLifecycleOwner, Observer {
             if (it) {
                 activity?.finish()
-                startActivity(Intent(context, MainActivity::class.java))
-
+                ActivityMain.navigate(activity)
             }
         })
 

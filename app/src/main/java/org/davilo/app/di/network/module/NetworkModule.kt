@@ -33,7 +33,7 @@ class NetworkModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("https://davilo.org/api/v1/")
+            .baseUrl("https://api.davilo.org/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create()).client(client)
             .build()
