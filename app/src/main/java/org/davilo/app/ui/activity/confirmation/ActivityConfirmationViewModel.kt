@@ -32,7 +32,7 @@ class ActivityConfirmationViewModel @ViewModelInject constructor(
     }
 
     fun confirm(email: String?, password: String?, code: String) {
-
+        appPreferences.setString(AppPreferences.Key.Email, email)
         disposable = loginRepository.confirm(email, code)
             .flatMap {
                 loginRepository.login(email = email, password = password)
@@ -58,7 +58,7 @@ class ActivityConfirmationViewModel @ViewModelInject constructor(
     fun saveUserInfo(response: LoginOutput) {
         appPreferences.setString(AppPreferences.Key.Token, response.token)
         appPreferences.setString(AppPreferences.Key.UserId, response.user.id)
-        appPreferences.setString(AppPreferences.Key.Email, response.user.id)
+
     }
 
     override fun onCleared() {

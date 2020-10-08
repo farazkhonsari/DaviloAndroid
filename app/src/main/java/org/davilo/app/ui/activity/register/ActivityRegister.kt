@@ -61,6 +61,8 @@ class ActivityRegister : BaseActivity<ActivityRegisterBinding>(), View.OnClickLi
             binding.register.isEnabled = true
             binding.username.isEnabled = true
             binding.password.isEnabled = true
+
+
             ActivityConfirmation.navigate(
                 context = this,
                 username = binding.username.text.toString(),

@@ -26,7 +26,7 @@ class LoginActivityViewModel @ViewModelInject constructor(
     }
 
     fun login(username: String, password: String) {
-
+        appPreferences.setString(AppPreferences.Key.Email, username)
         disposable = loginRepository.login(email = username, password = password)
             .subscribe(loginLiveData::postValue, errorLiveData::postValue)
 
@@ -35,7 +35,7 @@ class LoginActivityViewModel @ViewModelInject constructor(
     fun saveUserInfo(response: LoginOutput) {
         appPreferences.setString(AppPreferences.Key.Token, response.token)
         appPreferences.setString(AppPreferences.Key.UserId, response.user.id)
-        appPreferences.setString(AppPreferences.Key.Email, response.user.id)
+
     }
 
     override fun onCleared() {
