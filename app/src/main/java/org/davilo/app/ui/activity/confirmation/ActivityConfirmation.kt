@@ -96,7 +96,7 @@ class ActivityConfirmation : BaseActivity<ActivityConfirmationBinding>(), View.O
 
     private fun startCountDownTimer() {
         binding.txtTimer.visibility = View.VISIBLE
-        initCountDownTimer(10, binding.txtTimer) {
+        initCountDownTimer(600, binding.txtTimer) {
             binding.txtTimer.visibility = View.INVISIBLE
             binding.btnResend.isEnabled = true
             binding.btnResend.visibility = View.VISIBLE

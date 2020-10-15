@@ -19,12 +19,23 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file('../keystore/release.jks')
+            keyAlias 'davilo-app'
+            keyPassword '7Z^ut4UaP^'
+            storePassword 'z?^x%T38gq'
+        }
+    }
+
     buildTypes {
         release {
             debuggable false
             shrinkResources true
             minifyEnabled true
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 

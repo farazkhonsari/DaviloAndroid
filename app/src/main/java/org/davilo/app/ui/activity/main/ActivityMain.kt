@@ -54,7 +54,7 @@ class ActivityMain : BaseActivity<ActivityMainBinding>() {
         val navGraphIds = listOf(
             R.navigation.nav_graph_home,
             R.navigation.nav_graph_info,
-//            R.navigation.nav_graph_dictionary,
+            R.navigation.nav_graph_dictionary,
             R.navigation.nav_graph_setting
         )
 
