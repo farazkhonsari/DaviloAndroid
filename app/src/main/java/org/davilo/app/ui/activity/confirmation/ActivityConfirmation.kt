@@ -44,6 +44,7 @@ class ActivityConfirmation : BaseActivity<ActivityConfirmationBinding>(), View.O
         username = intent?.getStringExtra(EXTRA_USERNAME)
         password = intent?.getStringExtra(EXTRA_PASSWORD)
         shouldRequestCode = intent?.getBooleanExtra(EXTRA_SHOULD_REQUEST_CODE, false)
+
     }
 
     private fun initView() {
